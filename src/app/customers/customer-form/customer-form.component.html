@@ -1,1 +1,67 @@
-<p>customer-form works!</p>
+<div class="alert alert-primary">
+  <h2>{{ customer ? "Modifier un client" : "Créer une client" }}</h2>
+  <p *ngIf="!customer">
+    Utilisez ce formulaire pour ajouter un nouveau client à votre base clients !
+  </p>
+  <p *ngIf="customer">
+    Utilisez ce formulaire pour ajouter modifier le client !
+  </p>
+</div>
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <input
+      formControlName="firstName"
+      type="text"
+      class="form-control"
+      [class.is-invalid]="hasViolation('firstName')"
+      placeholder="Prénom du client"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="form.get('firstName').hasError('violation')"
+    >
+      {{ getViolationMessage("firstName") }}
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      formControlName="lastName"
+      type="text"
+      class="form-control"
+      [class.is-invalid]="hasViolation('lastName')"
+      placeholder="Nom de famille du client"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="form.get('lastName').hasError('violation')"
+    >
+      {{ getViolationMessage("lastName") }}
+    </div>
+  </div>
+  <div class="form-group">
+    <input
+      formControlName="email"
+      type="email"
+      class="form-control"
+      [class.is-invalid]="hasViolation('email')"
+      placeholder="Adresse email du client"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="form.get('email').hasError('violation')"
+    >
+      {{ getViolationMessage("email") }}
+    </div>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="error">
+    Nous n'avons pas pu sauvegarder votre client, veuillez ré-essayer plus tard.
+  </div>
+
+  <button type="submit" class="btn btn-success">
+    {{ customer ? "Enregistrer les modifications" : "Créer le client" }}
+  </button>
+  <a routerLink="/customers" class="btn btn-link">
+    Annuler et revenir à la liste
+  </a>
+</form>

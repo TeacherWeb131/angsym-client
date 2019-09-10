@@ -1,1 +1,44 @@
-<p>customers works!</p>
+<h2>Vos clients</h2>
+<div class="alert alert-primary">
+  <h2>Vos clients</h2>
+  Vous pouvez gérer vos clients via cet écran, et n'hésitez pas non plus à les
+  ajouter dès que vous les rencontrez afin de mieux les suivre !
+  <hr />
+  <a routerLink="/customers/new" class="btn btn-info">Ajouter un client</a>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Client</th>
+      <th>Email</th>
+      <th>Factures</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of customers">
+      <td>{{ c.id }}</td>
+      <td><a href=""></a>{{ c.firstName }} {{ c.lastName }}</td>
+      <td>{{ c.email }}</td>
+      <td class="text-center">
+        <span class="badge badge-info">
+          {{ c.invoices.length }}
+        </span>
+      </td>
+      <td>
+        <a
+          routerLink="/customers/{{ c.id }}"
+          class="btn btn-success btn-sm mr-2"
+          >Voir</a
+        >
+        <a
+          routerLink="/customers/{{ c.id }}/edit"
+          class="btn btn-primary btn-sm mr-2"
+          >Modifier</a
+        >
+        <button class="btn btn-danger btn-sm">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

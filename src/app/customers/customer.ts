@@ -1,8 +1,11 @@
 export interface Customer {
   id: number;
-  fistName: string;
+  firstName: string;
   lastName: string;
-  email: SpeechGrammar;
+  email: string;
   invoices?: any[];
   user?: any;
+  totalAmount: number;
+  paidAmount: number;
+  unpaidAmount: number;
 }
