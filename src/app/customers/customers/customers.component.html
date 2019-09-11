@@ -37,7 +37,9 @@
           class="btn btn-primary btn-sm mr-2"
           >Modifier</a
         >
-        <button class="btn btn-danger btn-sm">Supprimer</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteCustomer(c.id)">
+          Supprimer
+        </button>
       </td>
     </tr>
   </tbody>

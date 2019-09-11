@@ -17,4 +17,8 @@ export class CustomersComponent implements OnInit {
       .findAll()
       .subscribe(httpcustomers => (this.customers = httpcustomers));
   }
+
+  deleteCustomer(id) {
+    this.service.delete(id).subscribe(data => alert("suppression OK"));
+  }
 }

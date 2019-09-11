@@ -25,13 +25,13 @@
     </ul>
 
     <ul class="navbar-nav">
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!isAuthenticated">
         <a routerLink="/register" class="btn btn-primary mr-1">Inscription</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="!isAuthenticated">
         <a routerLink="/login" class="btn btn-success">Connexion</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isAuthenticated">
         <a routerLink="/profile" class="nav-link">
           <img
             src="http://robohash.org/djamel"
@@ -41,8 +41,10 @@
           Djamel
         </a>
       </li>
-      <li class="nav-item">
-        <a routerLink="/logout" class="btn btn-danger">Déconnexion</a>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a routerLink="/logout" class="btn btn-danger" (click)="handleLogout()"
+          >Déconnexion</a
+        >
       </li>
     </ul>
   </div>

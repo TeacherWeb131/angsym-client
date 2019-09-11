@@ -2,22 +2,26 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Customer } from "./customer";
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class CustomersService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
+
+  private getHeaders() {
+    return {
+      headers: {
+        Authorization: "Bearer " + this.auth.getToken()
+      }
+    };
+  }
 
   public findAll() {
-    return this.http.get("http://localhost:8000/customers").pipe(
-      map(data => {
-        // Travailler sur les données et les transformer
-        const customers = data["hydra:member"] as Customer[];
-        // les retourner sous la forme d'un tableau de véritables customers
-        return customers;
-      })
-    );
+    return this.http
+      .get("http://localhost:8000/customers")
+      .pipe(map(data => data["hydra:member"] as Customer[]));
   }
 
   public find(id: number) {
@@ -43,5 +47,10 @@ export class CustomersService {
       "http://localhost:8000/customers/" + customer.id,
       updatedCustomer
     );
+  }
+
+  // DELETE !!!
+  public delete(id: number) {
+    return this.http.delete<Customer>("http://localhost:8000/customers/" + id);
   }
 }
