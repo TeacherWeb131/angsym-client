@@ -41,6 +41,10 @@
     </div>
   </div>
 
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+
   <button type="submit" class="btn btn-success">Connexion !</button>
   <a routerLink="/register" class="btn btn-link">
     Ou créez un nouveau compte

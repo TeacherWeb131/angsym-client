@@ -3,6 +3,7 @@ import { Credentials } from "./credentials";
 import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { Subject } from "rxjs";
+import jwtDecode from "jwt-decode";
 
 interface AuthResponse {
   token: string;
@@ -43,5 +44,11 @@ export class AuthService {
       return false;
     }
     return true;
+  }
+
+  getUserData() {
+    if (!this.getToken()) return null;
+
+    return jwtDecode(this.getToken());
   }
 }

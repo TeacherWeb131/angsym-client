@@ -33,12 +33,8 @@
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">
         <a routerLink="/profile" class="nav-link">
-          <img
-            src="http://robohash.org/djamel"
-            alt="Avatar de Djamel"
-            class="avatar"
-          />
-          Djamel
+          <img [src]="userData.avatar" alt="Votre avatar" class="avatar" />
+          {{ userData.username }}
         </a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated">

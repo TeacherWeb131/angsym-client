@@ -49,7 +49,7 @@ export class CustomersService {
     );
   }
 
-  // DELETE !!!
+  // DELETE
   public delete(id: number) {
     return this.http.delete<Customer>("http://localhost:8000/customers/" + id);
   }

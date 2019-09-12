@@ -1,0 +1,18 @@
+<div class="alert alert-warning">
+  <h2>
+    Oops, La page recherchée n'existe pas !
+  </h2>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem vitae
+    ab eos alias sunt ullam commodi eius nihil quidem laudantium!
+  </p>
+</div>
+<h2>
+  L'adresse <strong>{{ currentUrl }}</strong> ne mène nulle part
+</h2>
+<div *ngIf="proposition">
+  <p>
+    Aviez-vous pensé à :
+    <a routerLink="{{ proposition }}">{{ proposition }}</a> ?
+  </p>
+</div>

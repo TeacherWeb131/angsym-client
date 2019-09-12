@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Customer } from "../customer";
 import { CustomersService } from "../customers.service";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: "app-customers",
@@ -10,15 +11,22 @@ import { CustomersService } from "../customers.service";
 export class CustomersComponent implements OnInit {
   customers: Customer[] = [];
 
-  constructor(private service: CustomersService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private customerService: CustomersService
+  ) {}
 
   ngOnInit() {
-    this.service
-      .findAll()
-      .subscribe(httpcustomers => (this.customers = httpcustomers));
+    this.customers = this.route.snapshot.data.apiCustomers;
   }
 
   deleteCustomer(id) {
-    this.service.delete(id).subscribe(data => alert("suppression OK"));
+    // Avant ce travail dans le client, il faut modifier la propriété 'invoices' dans l'entité 'Customer'
+    // et ajouter 'orphanRemoval=true' en annotations pour authoriser la suppression des factures (invoices) liés à ce client
+    // ATTENTION: dans notre cas d'application client, c'est une très mauvaise pratique car on ne supprime jamais les factures ni le client, au pire on archive.
+    this.customerService.delete(id).subscribe(data => alert("Suppression OK"));
+    this.customerService
+      .findAll()
+      .subscribe(httpcustomers => (this.customers = httpcustomers));
   }
 }
