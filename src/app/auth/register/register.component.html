@@ -1,1 +1,42 @@
-<p>register works!</p>
+<h2>Créer un compte</h2>
+<form [formGroup]="form" (ngSubmit)="handleSubmit()">
+  <div class="form-group">
+    <input
+      type="email"
+      formControlName="email"
+      class="form-control"
+      placeholder="Votre email"
+    />
+    <p *ngIf="email.hasError('violation')">
+      {{ form.get("email").getError("violation") }}
+    </p>
+  </div>
+  <div class="form-group">
+    <input
+      type="password"
+      formControlName="password"
+      class="form-control"
+      placeholder="Votre mot de passe"
+    />
+    <p *ngIf="password.hasError('violation')">
+      {{ form.get("password").getError("violation") }}
+    </p>
+  </div>
+  <div class="form-group">
+    <input
+      type="url"
+      formControlName="avatar"
+      class="form-control"
+      placeholder="URL de votre avatar"
+    />
+    <p *ngIf="avatar.hasError('violation')">
+      {{ form.get("avatar").getError("violation") }}
+    </p>
+  </div>
+  <div class="alert alert-danger" *ngIf="error">
+    Une erreur inconne est survenue.
+  </div>
+  <button class="btn btn-success">
+    Inscription
+  </button>
+</form>
